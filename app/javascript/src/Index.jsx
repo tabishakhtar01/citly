@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import shortnersApi from "apis/shortners";
 import Home from "./Home";
 import { Switch, Route, useHistory } from "react-router-dom";
@@ -8,6 +8,7 @@ const Index = () => {
   const [url, setUrl] = useState("");
   const [isSelected, setIsSelected] = useState(false);
   const history = useHistory;
+
   const setLink = async () => {
     let code = new Date().getTime().toString();
     try {
@@ -18,12 +19,12 @@ const Index = () => {
           short_url: `http://localhost:3000/s/${code}`,
         },
       });
-      // alert("Your Shortened Links is --- http://localhost:3000/s/" + code);
       setUrl("");
       setIsSelected(true);
     } catch (error) {
       history.push("/");
     }
+    setIsSelected(false);
   };
 
   return (
