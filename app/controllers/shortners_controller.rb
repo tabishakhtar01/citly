@@ -1,5 +1,6 @@
 class ShortnersController < ApplicationController
     def index
-        @shortner = Shortner.all
+        shortners = Shortner.all
+        render status: :ok, json: {shortners: shortners}
     end
 end
