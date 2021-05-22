@@ -1,1 +1,9 @@
 <h1> Short your URL with as ease </h1>
+
+    <ul>
+    <% @shortner.each do |shortner| %>
+        <li>
+            <%= shortner.url %>
+        </li> 
+    <% end %>
+    </ul>

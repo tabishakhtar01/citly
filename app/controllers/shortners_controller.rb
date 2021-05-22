@@ -1,5 +1,5 @@
 class ShortnersController < ApplicationController
     def index
-        render
+        @shortner = Shortner.all
     end
 end
