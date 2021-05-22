@@ -26,6 +26,6 @@ class ShortnersController < ApplicationController
     private
 
     def shortner_params
-        params.require(:shortner).permit(:url, :code)
+        params.require(:shortner).permit(:url, :code, :short_url)
     end
 end
