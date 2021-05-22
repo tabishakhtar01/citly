@@ -16,6 +16,13 @@ class ShortnersController < ApplicationController
         render status: :unprocessable_entity, json: { errors: e.message }
     end
 
+    def show
+        shortner = Shortner.find_by!(code: params[:code])
+        render status: :ok, json: {shortner: shortner}
+        rescue ActiveRecord::RecordNotFound => errors
+        render json: {errors: errors}, status: :not_found
+    end
+
     private
 
     def shortner_params
