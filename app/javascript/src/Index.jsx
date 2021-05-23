@@ -10,21 +10,26 @@ const Index = () => {
   const history = useHistory;
 
   const setLink = async () => {
-    let code = new Date().getTime().toString();
-    try {
-      await shortnersApi.create({
-        shortner: {
-          url: url,
-          code: code,
-          short_url: `http://localhost:3000/s/${code}`,
-        },
-      });
-      setUrl("");
-      setIsSelected(true);
-    } catch (error) {
-      history.push("/");
+    if (!url) {
+      alert("Url field can't be empty");
+    } else {
+      let code = new Date().getTime().toString();
+      try {
+        await shortnersApi.create({
+          shortner: {
+            url: url,
+            code: code,
+            short_url: `http://localhost:3000/s/${code}`,
+          },
+        });
+        alert(`Well Done! url shorted --- http://localhost:3000/s/${code}`);
+        setUrl("");
+        setIsSelected(true);
+      } catch (error) {
+        history.push("/");
+      }
+      setIsSelected(false);
     }
-    setIsSelected(false);
   };
 
   return (

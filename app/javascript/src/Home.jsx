@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import shortnersApi from "apis/shortners";
+import Container from "./components/Container";
+import Table from "./components/Table/index";
 const Home = props => {
   const [link, setLink] = useState([]);
   const fetchUrls = async () => {
@@ -12,7 +14,7 @@ const Home = props => {
 
   return (
     <>
-      <div className="text-center mt-10 bg-green-200 h-screen">
+      <div className="text-center mt-10">
         <input
           className="border mt-10 md:w-1/3 border-b-gray py-2 px-4 rounded"
           type="text"
@@ -27,37 +29,18 @@ const Home = props => {
         >
           Short My URL...
         </button>
-
-        {link.map(currVal => {
-          return (
-            <>
-              <div className="mt-10 text-center grid grid-cols-2 divide-x-2 divide-blue-600">
-                <span key={currVal.code} className="text-gray-700">
-                  {currVal.url}
-                </span>
-                <span>
-                  <a
-                    href={currVal.short_url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-gray-800"
-                  >
-                    {currVal.short_url}
-                  </a>
-                </span>
-              </div>
-              <hr
-                style={{
-                  display: "inline-block",
-                  width: "70%",
-                  height: "3px",
-                  backgroundColor: "black",
-                }}
-              />
-            </>
-          );
-        })}
       </div>
+      {!link ? (
+        <Container>
+          <h1 className="text-xl mt-10 leading-5 text-center">
+            Currently we have no shorted Url but sure you can try one 😋
+          </h1>
+        </Container>
+      ) : (
+        <Container>
+          <Table data={link}></Table>
+        </Container>
+      )}
     </>
   );
 };
