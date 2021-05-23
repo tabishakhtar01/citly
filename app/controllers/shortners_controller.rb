@@ -1,6 +1,8 @@
 class ShortnersController < ApplicationController
+    skip_before_action :verify_authenticity_token
+    before_action :load_shortner, only: [:show, :update]
     def index
-        shortners = Shortner.all
+        shortners = Shortner.all.order(status: :desc, created_at: :desc)
         render status: :ok, json: {shortners: shortners}
     end
 
@@ -17,15 +19,29 @@ class ShortnersController < ApplicationController
     end
 
     def show
-        shortner = Shortner.find_by!(code: params[:code])
-        render status: :ok, json: {shortner: shortner}
-        rescue ActiveRecord::RecordNotFound => errors
-        render json: {errors: errors}, status: :not_found
+        # shortner = Shortner.find_by!(code: params[:code])
+        render status: :ok, json: {shortner: @shortner}
+        # rescue ActiveRecord::RecordNotFound => errors
+        # render json: {errors: errors}, status: :not_found
+    end
+
+    def update
+        @shortner.update_attribute(:status, !@shortner.status)
+        render status: :ok, json: {
+          message: 'Link has been pinned'
+        }
     end
 
     private
 
     def shortner_params
-        params.require(:shortner).permit(:url, :code, :short_url)
+        params.require(:shortner).permit(:url, :code, :short_url, :status)
     end
+
+    def load_shortner
+        @shortner = Shortner.find_by!(code: params[:code])
+        render json: {errors:  @shortner.errors.full_messages.to_sentence} unless @shortner
+        rescue ActiveRecord::RecordNotFound => e
+        render json: { error: e }, status: :not_found
+    end 
 end

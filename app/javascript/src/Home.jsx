@@ -2,12 +2,27 @@ import React, { useEffect, useState } from "react";
 import shortnersApi from "apis/shortners";
 import Container from "./components/Container";
 import Table from "./components/Table/index";
+import { isNil, isEmpty, either } from "ramda";
+
 const Home = props => {
   const [link, setLink] = useState([]);
+  var [count, setCount] = useState(link.count);
   const fetchUrls = async () => {
     const response = await shortnersApi.list();
     setLink(response.data.shortners);
   };
+
+  const starTask = async (code, status) => {
+    try {
+      await shortnersApi.update(code);
+      fetchUrls();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const countClicks = id => {};
+
   useEffect(() => {
     fetchUrls();
   }, [props.state]);
@@ -30,7 +45,7 @@ const Home = props => {
           Short My URL...
         </button>
       </div>
-      {!link ? (
+      {either(isNil, isEmpty)(link) ? (
         <Container>
           <h1 className="text-xl mt-10 leading-5 text-center">
             Currently we have no shorted Url but sure you can try one 😋
@@ -38,7 +53,12 @@ const Home = props => {
         </Container>
       ) : (
         <Container>
-          <Table data={link}></Table>
+          <Table
+            data={link}
+            starTask={starTask}
+            countClicks={countClicks}
+            count={count}
+          ></Table>
         </Container>
       )}
     </>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_22_184653) do
+ActiveRecord::Schema.define(version: 2021_05_23_215942) do
 
   create_table "shortners", force: :cascade do |t|
     t.text "url", null: false
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2021_05_22_184653) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "short_url"
+    t.boolean "status", default: false
+    t.integer "count", default: 0, null: false
   end
 
 end
