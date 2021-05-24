@@ -3,7 +3,7 @@ import React from "react";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
-const Table = ({ data, starTask, countClicks }) => {
+const Table = ({ data, starUrl, countClicks }) => {
   return (
     <div className="flex flex-col mt-10 ">
       <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -13,7 +13,7 @@ const Table = ({ data, starTask, countClicks }) => {
               <TableHeader />
               <TableRow
                 data={data}
-                starTask={starTask}
+                starUrl={starUrl}
                 countClicks={countClicks}
               />
             </table>

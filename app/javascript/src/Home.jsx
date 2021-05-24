@@ -6,13 +6,12 @@ import { isNil, isEmpty, either } from "ramda";
 
 const Home = props => {
   const [link, setLink] = useState([]);
-  // const [count,setCount] = useState(0)
   const fetchUrls = async () => {
     const response = await shortnersApi.list();
     setLink(response.data.shortners);
   };
 
-  const starTask = async code => {
+  const starUrl = async code => {
     try {
       await shortnersApi.update(code);
       fetchUrls();
@@ -35,7 +34,10 @@ const Home = props => {
     <>
       <div className="text-center mt-10">
         <input
-          className="border mt-10 md:w-1/3 border-b-gray py-2 px-4 rounded"
+          className="border mt-10 md:w-1/3 border-b-gray py-2 px-4 transition duration-150 ease-in-out
+          border-gray-300 rounded-md appearance-none
+          focus:outline-none focus:shadow-outline-blue
+          focus:border-blue-300 sm:text-sm sm:leading-5"
           type="text"
           onChange={e => props.OnChange(e.target.value)}
           placeholder="Enter The URL To Short.."
@@ -43,7 +45,7 @@ const Home = props => {
           value={props.data}
         />
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+          className="bg-blue-500 md:w-auto w-auto hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
           onClick={props.OnClick}
         >
           Short My URL...
@@ -59,7 +61,7 @@ const Home = props => {
         <Container>
           <Table
             data={link}
-            starTask={starTask}
+            starUrl={starUrl}
             countClicks={countClicks}
           ></Table>
         </Container>

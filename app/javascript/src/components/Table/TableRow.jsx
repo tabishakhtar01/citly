@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableRow = ({ data, starTask, countClicks }) => {
+const TableRow = ({ data, starUrl, countClicks }) => {
   return (
     <tbody className="bg-white divide-y divide-bb-gray-600">
       {data.map(rowData => (
@@ -12,7 +12,7 @@ const TableRow = ({ data, starTask, countClicks }) => {
                   ? "ri-pushpin-fill text-blue-500"
                   : "ri-pushpin-line"
               }`}
-              onClick={() => starTask(rowData.code, rowData.status)}
+              onClick={() => starUrl(rowData.code, rowData.status)}
             ></i>
           </td>
           <td className="px-6 py-3 text-sm break-all font-medium leading-5 max-w-xs cursor-pointer">
