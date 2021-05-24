@@ -1,6 +1,6 @@
-class ShortnersController < ApplicationController
-    skip_before_action :verify_authenticity_token
+class ShortnersController < ApplicationControlle
     before_action :load_shortner, only: [:show, :update]
+    
     def index
         shortners = Shortner.all.order(status: :desc, created_at: :desc)
         render status: :ok, json: {shortners: shortners}
@@ -19,12 +19,8 @@ class ShortnersController < ApplicationController
     end
 
     def show
-        # shortner = Shortner.find_by!(code: params[:code])
         @shortner.update_attribute(:count, @shortner.count + 1)
         render status: :ok, json: {  shortner: @shortner }
-        # render status: :ok, json: {shortner: @shortner}
-        # rescue ActiveRecord::RecordNotFound => errors
-        # render json: {errors: errors}, status: :not_found
     end
     
     def update
