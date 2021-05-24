@@ -19,12 +19,8 @@ class ShortnersController < ApplicationController
     end
 
     def show
-        # shortner = Shortner.find_by!(code: params[:code])
         @shortner.update_attribute(:count, @shortner.count + 1)
         render status: :ok, json: {  shortner: @shortner }
-        # render status: :ok, json: {shortner: @shortner}
-        # rescue ActiveRecord::RecordNotFound => errors
-        # render json: {errors: errors}, status: :not_found
     end
     
     def update
@@ -43,7 +39,5 @@ class ShortnersController < ApplicationController
     def load_shortner
         @shortner = Shortner.find_by_code(params[:code])
         render json: {errors:  @shortner.errors.full_messages.to_sentence} unless @shortner
-        rescue ActiveRecord::RecordNotFound => e
-        render json: { error: e }, status: :not_found
     end 
 end
