@@ -19,10 +19,12 @@ const Index = () => {
           shortner: {
             url: url,
             code: code,
-            short_url: `http://localhost:3000/s/${code}`,
+            short_url: `https://citly-short.herokuapp.com/s/${code}`,
           },
         });
-        alert(`Well Done! url shorted --- http://localhost:3000/s/${code}`);
+        alert(
+          `Well Done! url shorted --- https://citly-short.herokuapp.com/s/${code}`
+        );
         setUrl("");
         setIsSelected(true);
       } catch (error) {
