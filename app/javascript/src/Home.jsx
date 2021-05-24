@@ -6,13 +6,13 @@ import { isNil, isEmpty, either } from "ramda";
 
 const Home = props => {
   const [link, setLink] = useState([]);
-  var [count, setCount] = useState(link.count);
+  // const [count,setCount] = useState(0)
   const fetchUrls = async () => {
     const response = await shortnersApi.list();
     setLink(response.data.shortners);
   };
 
-  const starTask = async (code, status) => {
+  const starTask = async code => {
     try {
       await shortnersApi.update(code);
       fetchUrls();
@@ -21,7 +21,11 @@ const Home = props => {
     }
   };
 
-  const countClicks = id => {};
+  const countClicks = () => {
+    setTimeout(() => {
+      fetchUrls();
+    }, 500);
+  };
 
   useEffect(() => {
     fetchUrls();
@@ -57,7 +61,6 @@ const Home = props => {
             data={link}
             starTask={starTask}
             countClicks={countClicks}
-            count={count}
           ></Table>
         </Container>
       )}

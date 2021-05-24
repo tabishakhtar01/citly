@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableRow = ({ data, starTask, countClicks, count }) => {
+const TableRow = ({ data, starTask, countClicks }) => {
   return (
     <tbody className="bg-white divide-y divide-bb-gray-600">
       {data.map(rowData => (
@@ -18,18 +18,20 @@ const TableRow = ({ data, starTask, countClicks, count }) => {
           <td className="px-6 py-3 text-sm break-all font-medium leading-5 max-w-xs cursor-pointer">
             {rowData.url}
           </td>
-          <td className="px-6 py-3 text-sm break-all font-medium leading-5 max-w-xs">
+          <td
+            className="px-6 py-3 text-sm break-all font-medium leading-5 max-w-xs"
+            onClick={countClicks}
+          >
             <a
-              href={rowData.url}
+              href={rowData.short_url}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => countClicks(rowData.code)}
             >
               {rowData.short_url}
             </a>
           </td>
-          <td className="px-3 py-4 text-sm text-center font-medium leading-5 whitespace-no-wrap bg-gray-100">
-            {count}
+          <td className="px-3 py-4 text-sm text-center font-medium leading-5 whitespace-no-wrap text-gray-600 bg-gray-100">
+            {Math.ceil(rowData.count / 2)}
           </td>
         </tr>
       ))}

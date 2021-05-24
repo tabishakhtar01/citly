@@ -20,11 +20,13 @@ class ShortnersController < ApplicationController
 
     def show
         # shortner = Shortner.find_by!(code: params[:code])
-        render status: :ok, json: {shortner: @shortner}
+        @shortner.update_attribute(:count, @shortner.count + 1)
+        render status: :ok, json: {  shortner: @shortner }
+        # render status: :ok, json: {shortner: @shortner}
         # rescue ActiveRecord::RecordNotFound => errors
         # render json: {errors: errors}, status: :not_found
     end
-
+    
     def update
         @shortner.update_attribute(:status, !@shortner.status)
         render status: :ok, json: {
@@ -35,7 +37,7 @@ class ShortnersController < ApplicationController
     private
 
     def shortner_params
-        params.require(:shortner).permit(:url, :code, :short_url, :status)
+        params.require(:shortner).permit(:url, :code, :short_url, :status, :count)
     end
 
     def load_shortner
