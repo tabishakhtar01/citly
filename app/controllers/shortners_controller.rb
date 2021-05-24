@@ -38,6 +38,6 @@ class ShortnersController < ApplicationController
 
     def load_shortner
         @shortner = Shortner.find_by_code(params[:code])
-        render json: {errors:  @shortner.errors.full_messages.to_sentence} unless @shortner
+        render json: {errors: "Something went wrong"} unless @shortner
     end 
 end

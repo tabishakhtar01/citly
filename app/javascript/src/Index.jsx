@@ -7,7 +7,7 @@ import ShortLink from "./ShortLink";
 const Index = () => {
   const [url, setUrl] = useState("");
   const [isSelected, setIsSelected] = useState(false);
-  const history = useHistory;
+  const history = useHistory();
 
   const setLink = async () => {
     if (!url) {
