@@ -1,7 +1,7 @@
 class ShortnersController < ApplicationController
     skip_before_action :verify_authenticity_token
-    attr_accessor :code
     before_action :load_shortner, only: [:show, :update]
+    attr_accessor :code
     def index
         shortners = Shortner.all.order(status: :desc, created_at: :desc)
         render status: :ok, json: {shortners: shortners}
