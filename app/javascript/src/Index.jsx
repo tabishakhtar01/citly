@@ -28,7 +28,7 @@ const Index = () => {
         setUrl("");
         setIsSelected(true);
       } catch (error) {
-        alert("Not a Valid Url");
+        alert(`Not a Valid Url or ${error}`);
         history.push("/");
       }
       setIsSelected(false);

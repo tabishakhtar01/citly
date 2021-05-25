@@ -11,7 +11,7 @@ class ShortnersController < ApplicationController
         if @shortner.save
             render status: :ok, json: {notice: "Link Saved"}
         else
-            errors = @shortner.erroes.full_messages
+            errors = @shortner.errors.full_messages
             render status: :unprocessable_entity, json: { errors: errors  }
         end
         rescue ActiveRecord::RecordNotUnique => e
@@ -37,7 +37,7 @@ class ShortnersController < ApplicationController
     end
 
     def load_shortner
-        @shortner = Shortner.where(code: params[:code]).take
+        @shortner = Shortner.find_by(params[:code])
         render json: {errors: "Something went wrong"} unless @shortner
     end 
 end
