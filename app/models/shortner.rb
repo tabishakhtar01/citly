@@ -1,4 +1,5 @@
 class Shortner < ApplicationRecord
-    validates_presence_of :url
-    # validates :url, format: URI::regexp(%w[http https])
+    validates :url, presence: true, format: URI::regexp(%w[http https])
+    validates :short_url, presence: true, format: URI::regexp(%w[http https])
+    validates :code, presence: true
 end
