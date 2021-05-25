@@ -1,5 +1,6 @@
 class ShortnersController < ApplicationController
     skip_before_action :verify_authenticity_token
+    attr_accessor :code
     before_action :load_shortner, only: [:show, :update]
     def index
         shortners = Shortner.all.order(status: :desc, created_at: :desc)
@@ -37,7 +38,7 @@ class ShortnersController < ApplicationController
     end
 
     def load_shortner
-        @shortner = Shortner.find_by(params[:code])
+        @shortner = Shortner.find_by_code(params[:code])
         render json: {errors: "Something went wrong"} unless @shortner
     end 
 end
