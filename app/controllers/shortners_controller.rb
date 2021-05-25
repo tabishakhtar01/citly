@@ -1,7 +1,6 @@
 class ShortnersController < ApplicationController
     skip_before_action :verify_authenticity_token
     before_action :load_shortner, only: [:show, :update]
-    attr_accessor :code
     def index
         shortners = Shortner.all.order(status: :desc, created_at: :desc)
         render status: :ok, json: {shortners: shortners}
@@ -15,8 +14,6 @@ class ShortnersController < ApplicationController
             errors = @shortner.errors.full_messages
             render status: :unprocessable_entity, json: { errors: errors  }
         end
-        rescue ActiveRecord::RecordNotUnique => e
-        render status: :unprocessable_entity, json: { errors: e.message }
     end
 
     def show
