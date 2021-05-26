@@ -6,9 +6,14 @@ import { isNil, isEmpty, either } from "ramda";
 
 const Home = props => {
   const [link, setLink] = useState([]);
+
   const fetchUrls = async () => {
-    const response = await shortnersApi.list();
-    setLink(response.data.shortners);
+    try {
+      const response = await shortnersApi.list();
+      setLink(response.data.shortners);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const starUrl = async code => {
@@ -45,7 +50,7 @@ const Home = props => {
           value={props.data}
         />
         <button
-          className="bg-blue-500 md:w-auto w-auto hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
+          className="bg-blue-500 w-auto hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
           onClick={props.OnClick}
         >
           Short My URL...
@@ -54,7 +59,7 @@ const Home = props => {
       {either(isNil, isEmpty)(link) ? (
         <Container>
           <h1 className="text-xl mt-10 leading-5 text-center">
-            Currently we have no shorted Url but sure you can try one 😋
+            Currently we have no shorten Url but sure you can try one 😋
           </h1>
         </Container>
       ) : (

@@ -7,6 +7,8 @@ import ShortLink from "./ShortLink";
 const Index = () => {
   const [url, setUrl] = useState("");
   const [isSelected, setIsSelected] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   const history = useHistory();
 
   const setLink = async () => {
@@ -27,8 +29,10 @@ const Index = () => {
         );
         setUrl("");
         setIsSelected(true);
+        setLoading(false);
       } catch (error) {
         alert(`Not a Valid Url or ${error}`);
+        setLoading(false);
         history.push("/");
       }
       setIsSelected(false);
