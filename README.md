@@ -1,24 +1,8 @@
-# README
+[![tabishakhtar01](https://circleci.com/gh/tabishakhtar01/citly.svg?style=shield)](https://circleci.com/gh/tabishakhtar01/citly)
+<br/>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# [CITLY](https://citly-short.herokuapp.com/)
 
-Things you may want to cover:
+Shorten your links using citly
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Check the deployment here: https://citly-short.herokuapp.com/
